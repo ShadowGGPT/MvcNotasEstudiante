@@ -11,5 +11,25 @@ create table Notas(
 [II P] int,
 [SIST] int,
 [PROY] int,
-[N.F] int
-)
+[N.F] int)
+go
+create trigger dbo.[N.F.Update]
+on
+dbo.Notas
+after update
+as
+begin
+update dbo.Notas 
+set [N.F] = [I P]+[II P]+[SIST]+[PROY]
+end
+go
+create trigger dbo.[N.F.Insert]
+on
+dbo.Notas
+after insert
+as
+begin
+update dbo.Notas 
+set [N.F] = [I P]+[II P]+[SIST]+[PROY]
+end
+
